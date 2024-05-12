@@ -2,3 +2,4 @@ node_modules/
 packages/shell/node_modules
 packages/terminal/node_modules
 
+test

@@ -1,7 +1,8 @@
 import { Response } from "./../utils/response";
+
 export  function createDirectoryDb(directory, pid) {
     const response = new Response(200, "")
-    const request = indexedDB.open("astroOS-Db");
+    const request = indexedDB.open("astroOS");
 
     request.onsuccess = function (event) {
       const db = event.target.result;
@@ -20,18 +21,25 @@ export  function createDirectoryDb(directory, pid) {
       });
       // @might-break
       if (pid != ""){
-        
+        console.log("@pid", pid);
         const requestGet = objectStore.get(pid)
         requestGet.onsuccess = function (event) {
           const existingFile = event.target.result;
           console.log("@updateDirectoryDb() - existingFile: ", existingFile);
           if (existingFile) {
-            existingFile.directories = directory.directories; 
-            existingFile.dateModified = getCurrentTime;
+           ///////
+            let records = existingFile.directories;
+            records.push(directory)
+            console.log(records);
+            existingFile.directories = records
+            /////////
+            existingFile.dateModified = new Date().toISOString()
             
-
+            
+            
             const putRequest = objectStore.put(existingFile);
-  
+            
+            console.log("@updateDirectoryDb() - putFile: ", existingFile);
             putRequest.onsuccess = function (event) {
               console.log("Parent Data updated in IndexedDB");
             };

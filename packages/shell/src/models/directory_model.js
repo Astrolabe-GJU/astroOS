@@ -1,9 +1,13 @@
-import { getCurrentTime } from '../utils/date_service';
+import { getCurrentTime } from "../utils/date_service";
+import mockData from "./../mockdata.json";
+import {  getUsername} from "../utils/user";
+//import { user } from "../init_data";
+
 // @TODO: complete dis
-let user = '';
+
 export class Directory {
   constructor({
-    id ,
+    id,
     name,
     path,
     directories = [],
@@ -11,6 +15,7 @@ export class Directory {
     dateCreated,
     dateModified,
     type = "File Folder",
+    size = 0,
   }) {
     //TODO: Test whether Id is better if private
     this._id = id; // ID of the Directory / Abs. Path with dir name
@@ -20,8 +25,8 @@ export class Directory {
     this.files = files; // Array to store files refs
     this.dateCreated = dateCreated; // Date when the directory was created
     this.dateModified = dateModified; // Date when the directory was last modified
-    this.size = 0;
-    this.type = type
+    this.size = size;
+    this.type = type;
   }
   addDirectory(directory) {
     this.directories.push(directory);
@@ -32,7 +37,7 @@ export class Directory {
   get path() {
     return this._path;
   }
-  
+
   set path(newPath) {
     this._path = newPath;
     // Optionally update the ID if needed
@@ -63,7 +68,10 @@ export class Directory {
     ];
     let div = document.createElement("div");
     const table = document.createElement("table");
-    div.innerHTML = '<br><br><span style="font-weigth: 600 ; color: #c3e88d;" >' + address + '</span><br><br>';
+    div.innerHTML =
+      '<br><br><span style="font-weigth: 600 ; color: #c3e88d;" >' +
+      address +
+      "</span><br><br>";
     table.innerHTML =
       '<table id="directoryTable"><thead><tr><th>Mode</th><th>LastWriteTime</th><th>Length</th><th>Name</th></tr></thead></table>';
     const directoryBody = document.createElement("tbody");
@@ -106,12 +114,25 @@ export class Directory {
 //   dateModified: Date(),
 // });
 // export default _R;
-export const _ROOT_ = new Directory({
-  id : user??'user7',  
+
+// export const _ROOT_ = new Directory({
+//   id: mockData.id,
+//   path: "",
+//   name: mockData.name,
+//   directories: [],
+//   files: [],
+//   dateCreated: getCurrentTime(),
+//   dateModified: getCurrentTime(),
+// });
+
+const user = await getUsername()
+export const rootDirectory = new Directory({
+  id: user,
+  name: user,
   path: "",
-  name: user??'user7',
   directories: [],
   files: [],
   dateCreated: getCurrentTime(),
   dateModified: getCurrentTime(),
+  size: 0,
 });

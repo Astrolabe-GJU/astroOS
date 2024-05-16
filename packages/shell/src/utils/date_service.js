@@ -1,7 +1,7 @@
-export function getCurrentTime() {
+export  function getCurrentTime() {
     return new Date().toISOString()
 }
-export function getRedeableDate(isoString) {
+export  function getRedeableDate(isoString) {
     const date = new Date(isoString)
 
     const readableDate = date.toLocaleDateString('en-US',{

@@ -1,5 +1,9 @@
+import { user } from "../init_data";
 import { DirectoryStack } from "../memory/directory_stack";
 import { makeDirectory } from "../repo/shell_api";
+import { getCurrentTime } from "../utils/date_service";
+import { getUsername } from "../utils/user";
+import { Directory, rootDirectory } from "./directory_model";
 
 export class Shell {
   // Shell stack initilaized @ROOT ---> // currentDirectory
@@ -7,11 +11,14 @@ export class Shell {
   // access to Shell API
   //  Auth
   constructor() {
-    this.dirStack = new DirectoryStack();
+    
+   
+    this.dirStack = new DirectoryStack(rootDirectory);
     this.commandHistory = [];
     this.currentHistoryIndex = -1;
+    this.account = rootDirectory.name;
   }
-  addAccount() {}
+  
   pushHistory(command) {
     const addedCommand = this.commandHistory.push(command);
     console.log("@push history: ", command);

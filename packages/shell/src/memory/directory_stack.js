@@ -1,21 +1,13 @@
 import EventEmitter from "events";
-import { Directory , _ROOT_} from "../models/directory_model";
 // IsEmpty operation: Checks if the stack is empty
 export class DirectoryStack extends EventEmitter {
-  constructor() {
+  constructor(_ROOT_) {
     super();
-    // const _R = new Directory({
     
-    //   name: "~",
-    //   path: "",
-    //   directories: [],
-    //   files: [],
-    //   dateCreated: Date(),
-    //   dateModified: Date(),
-    // });
     this._ROOT = _ROOT_; // Root directory symbol
     this.directories = [_ROOT_]; // Array to hold directories
     this.address = this._ROOT.name; // Current address
+   
   }
 
   // Method to push a directory onto the stack
@@ -72,6 +64,3 @@ export class DirectoryStack extends EventEmitter {
   }
   
 }
-// TODO: Ensure freeing memory by closing in other files by doing this `stack_1 = null;`
-let shellStack = new DirectoryStack();
-export default shellStack;

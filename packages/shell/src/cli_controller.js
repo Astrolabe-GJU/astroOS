@@ -9,6 +9,7 @@ export async function parseAndExecuteCommand(command, upperDoc, shell) {
   let exe = tokens[0];
   let args = tokens.slice(1);
   let currentDirectory = shell.dirStack.peek();
+  console.log("xxxxxxxxxxxx", currentDirectory, shell);
   let output = "",
     res = "";
 
@@ -17,12 +18,15 @@ export async function parseAndExecuteCommand(command, upperDoc, shell) {
       break;
     case "cd":
       res = await changeDirectory(args, currentDirectory, shell.dirStack);
-      res.status;
+      //res.status;
+      console.log("@md --changeDirectory");
+      console.log(currentDirectory);
       break;
     case "md":
     case "mkdir":
       res = await makeDirectory(args, currentDirectory);
-      console.log("@CLiController --mkdir", res);
+      console.log("@md --currentDirectory");
+      // console.log("@CLiController --mkdir", res);
       res.status == 200
         ? null
         : (output = spanText(theme.red, res.payload, "600"));

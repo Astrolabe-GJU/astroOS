@@ -4,9 +4,9 @@ import { Shell } from "./models/shell_model";
 // init Data()
 //initDb()
 ///
-import { rootDirectory } from "./models/directory_model";
-
-let shell = new Shell();
+import { rootDirectory, _ROOT_ } from "./models/directory_model";
+await _ROOT_(rootDirectory);
+const shell = new Shell();
 
 let dirLabel = document.getElementById("dir-label");
 let upperDoc = document.querySelector(".terminal-upper");

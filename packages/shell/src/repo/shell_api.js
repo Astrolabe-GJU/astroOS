@@ -100,6 +100,9 @@ export async function makeDirectory(args, currentDirectory) {
 
   return res;
 }
+export async function updateDirectory(directory, pid) {
+  await updateDirectoryDb(directory, '')
+}
 export async function removeDirectory(args, currentDirectory) {
   if (args.isEmpty || args[0] == undefined || args[0] == "") {
     return new Response(300, "Please specify Directory Name");

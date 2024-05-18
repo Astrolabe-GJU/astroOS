@@ -1,4 +1,5 @@
 import { rootDirectory } from "../models/directory_model";
+
 import { Response } from "./../utils/response";
 
 export function createDirectoryDb(directory, pid) {
@@ -80,6 +81,7 @@ export async function createIfRootDir() {
       console.error(error);
     });
 }
+// @TODO: might break cuz of no async
 export function updateDirectoryDb(directory, pid) {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open("astroOS");
@@ -150,4 +152,41 @@ export function removeDirectoryDb(directory) {
 
   })
   
+}
+export async function getDirectoriesFromIndexedDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open("astroOS", 1);
+
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains("directories")) {
+        db.createObjectStore("directories", { keyPath: "id" });
+      }
+    };
+
+    request.onsuccess = (event) => {
+      const db = event.target.result;
+      const transaction = db.transaction(["directories"], "readonly");
+      const objectStore = transaction.objectStore("directories");
+      const directories = [];
+
+      objectStore.openCursor().onsuccess = (event) => {
+        const cursor = event.target.result;
+        if (cursor) {
+          directories.push(cursor.value);
+          cursor.continue();
+        } else {
+          resolve(directories);
+        }
+      };
+
+      transaction.onerror = (event) => {
+        reject(event.target.error);
+      };
+    };
+
+    request.onerror = (event) => {
+      reject(event.target.error);
+    };
+  });
 }

@@ -1,7 +1,7 @@
 import { getCurrentTime, getRedeableDate } from "../utils/date_service";
 
-import {  getUsername} from "../../../../src/user/user_api";
-
+import { getUsername } from "../../../../src/user/user_api";
+import { getDirectoriesFromIndexedDB } from "./../repo/directories_api";
 
 // @TODO: complete dis
 
@@ -30,7 +30,7 @@ export class Directory {
   }
   addDirectory(directory) {
     this.directories.push(directory);
-    this.dateModified = getCurrentTime()
+    this.dateModified = getCurrentTime();
   }
   get id() {
     return this._id;
@@ -38,7 +38,7 @@ export class Directory {
   get path() {
     return this._path;
   }
-  
+
   set path(newPath) {
     this._path = newPath;
     // Optionally update the ID if needed
@@ -47,16 +47,16 @@ export class Directory {
   removeDirectory(directory) {
     // TODO: Implement all Cases.
     this.directories.pop(directory);
-    this.dateModified = getCurrentTime()
+    this.dateModified = getCurrentTime();
   }
   addFile(files) {
     this.files.push(files);
-    this.dateModified = getCurrentTime()
+    this.dateModified = getCurrentTime();
   }
   removeFile(files) {
     // TODO: Implement all Cases.
     this.files.pop(files);
-    this.dateModified = getCurrentTime()
+    this.dateModified = getCurrentTime();
   }
   getNumOfItems() {
     return this.directories.length + this.files.length;
@@ -119,8 +119,67 @@ export class Directory {
 //   dateCreated: getCurrentTime(),
 //   dateModified: getCurrentTime(),
 // });
+function nestDirectories(directories) {
+  const directoryMap = new Map();
 
-const user = await getUsername()
+  // Initialize map
+  directories.forEach((directory) => {
+    directoryMap.set(directory.id, { ...directory, directories: [] });
+  });
+
+  // Nest directories
+  directories.forEach((directory) => {
+    const parentPath = directory.path;
+    if (parentPath && directoryMap.has(parentPath)) {
+      directoryMap
+        .get(parentPath)
+        .directories.push(directoryMap.get(directory.id));
+    }
+  });
+
+  // Find root directories
+  const nestedDirectories = [];
+  directoryMap.forEach((directory) => {
+    const parentPath = directory.path;
+    if (!parentPath || !directoryMap.has(parentPath)) {
+      nestedDirectories.push(directory);
+    }
+  });
+
+  return nestedDirectories;
+}
+
+function convertToDirectoryModel(directory) {
+  return new Directory({
+    id: directory.id, // Absolute path
+    path: directory.path, // Parent path
+    name: directory.name,
+    directories: directory.directories || [],
+    files: directory.files || [],
+    size: directory.size,
+    dateCreated: directory.dateCreated,
+    dateModified: directory.dateModified,
+  });
+}
+
+const user = await getUsername();
+export const _ROOT_ = async (rootDirectory) => {
+  const dirs = await getDirectoriesFromIndexedDB();
+  const directoryModels = dirs.map(convertToDirectoryModel);
+  const nestedDirectories = nestDirectories(directoryModels);
+
+  const _rootDir = nestedDirectories.length > 0 ? nestedDirectories[0] : null;
+
+  console.log("🌐 bef dis", _rootDir);
+  console.log("🌐 bef dis", rootDirectory);
+  rootDirectory.directories = _rootDir.directories;
+  rootDirectory.files = _rootDir.files;
+  rootDirectory.size = _rootDir.size;
+  rootDirectory.dateCreated = _rootDir.dateCreated;
+  rootDirectory.dateModified = _rootDir.dateModified;
+  console.log("🌐 after dis", rootDirectory);
+};
+
 export const rootDirectory = new Directory({
   id: user,
   name: user,

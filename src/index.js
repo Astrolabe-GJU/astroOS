@@ -1,7 +1,7 @@
-import { initOS } from "./init_os";
+//import { initOS } from "./init_os";
 import { saveUserAccount } from "./user/user_api";
 
-await initOS();
+//await initOS();
 
 
 // @toBeDeleted later

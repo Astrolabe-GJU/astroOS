@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading State Example</title>
+    <style>
+      .loading {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+      }
+      .loaded-content {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading">Loading...</div>
+    <div class="loaded-content">
+      <!-- Content will be dynamically inserted here -->
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const loadingElement = document.querySelector(".loading");
+        const loadedContentElement = document.querySelector(".loaded-content");
+
+        // Show loading animation
+        loadingElement.style.display = "block";
+
+        try {
+          const directories = await fetchDirectoriesFromIndexedDB();
+          const directoryModels = directories.map(convertToDirectoryModel);
+
+          // Hide loading animation
+          loadingElement.style.display = "none";
+
+          // Display loaded content
+          loadedContentElement.style.display = "block";
+          displayDirectories(directoryModels, loadedContentElement);
+        } catch (error) {
+          console.error("Error loading directories:", error);
+          loadingElement.textContent = "Failed to load data";
+        }
+      });
+
+      async function fetchDirectoriesFromIndexedDB() {
+        return new Promise((resolve, reject) => {
+          const request = indexedDB.open("astroOS", 1);
+
+          request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+            if (!db.objectStoreNames.contains("directories")) {
+              db.createObjectStore("directories", { keyPath: "id" });
+            }
+          };
+
+          request.onsuccess = (event) => {
+            const db = event.target.result;
+            const transaction = db.transaction(["directories"], "readonly");
+            const objectStore = transaction.objectStore("directories");
+            const directories = [];
+
+            objectStore.openCursor().onsuccess = (event) => {
+              const cursor = event.target.result;
+              if (cursor) {
+                directories.push(cursor.value);
+                cursor.continue();
+              } else {
+                resolve(directories);
+              }
+            };
+
+            transaction.onerror = (event) => {
+              reject(event.target.error);
+            };
+          };
+
+          request.onerror = (event) => {
+            reject(event.target.error);
+          };
+        });
+      }
+
+      function convertToDirectoryModel(directory) {
+        return {
+          id: directory.id,
+          path: directory.path,
+          name: directory.name,
+          directories: directory.directories,
+          files: directory.files,
+          size: directory.size,
+          dateCreated: new Date(directory.dateCreated),
+          dateModified: new Date(directory.dateModified),
+        };
+      }
+
+      function displayDirectories(directoryModels, container) {
+        container.innerHTML = "";
+        directoryModels.forEach((directory) => {
+          const directoryElement = document.createElement("div");
+          directoryElement.textContent = `Name: ${directory.name}, Path: ${directory.path}`;
+          container.appendChild(directoryElement);
+        });
+        
+      }
+    </script>
+  </body>
+</html>

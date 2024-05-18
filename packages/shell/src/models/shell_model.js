@@ -1,8 +1,7 @@
-import { user } from "../init_data";
+
 import { DirectoryStack } from "../memory/directory_stack";
-import { makeDirectory } from "../repo/shell_api";
-import { getCurrentTime } from "../utils/date_service";
-import { getUsername } from "../utils/user";
+
+
 import { Directory, rootDirectory } from "./directory_model";
 
 export class Shell {

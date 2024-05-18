@@ -1,12 +1,10 @@
 import { parseAndExecuteCommand } from "./cli_controller";
 import { Shell } from "./models/shell_model";
-import { initData } from "./init_data";
+
 // init Data()
 //initDb()
 ///
 import { rootDirectory } from "./models/directory_model";
-
-await initData();
 
 let shell = new Shell();
 

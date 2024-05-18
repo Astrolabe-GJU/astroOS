@@ -1,30 +1,63 @@
-import {makeDirectory  } from "./repo/shell_api";
-export function parseAndExecuteCommand(command, upperDoc, shell) {
-  
-
+import {
+  makeDirectory,
+  removeDirectory,
+  changeDirectory,
+} from "./repo/shell_api";
+import theme from "./theme.json";
+export async function parseAndExecuteCommand(command, upperDoc, shell) {
   let tokens = command.toLowerCase().split(" ");
   let exe = tokens[0];
   let args = tokens.slice(1);
   let currentDirectory = shell.dirStack.peek();
-  let output = '';
+  let output = "",
+    res = "";
 
   switch (exe) {
     case "help":
       break;
     case "cd":
+      res = await changeDirectory(args, currentDirectory, shell.dirStack);
+      res.status;
       break;
     case "md":
-      break;
     case "mkdir":
-       output = makeDirectory(args, currentDirectory);
-    //   if (res2 != null) {
-    //     let d2 = document.createElement("div");
-    //     d2.innerHTML = spanText(theme.red, res2);
-    //     appendHistory(upperDoc, d2);
-    //   }
+      res = await makeDirectory(args, currentDirectory);
+      console.log("@CLiController --mkdir", res);
+      res.status == 200
+        ? null
+        : (output = spanText(theme.red, res.payload, "600"));
+      break;
+    case "rmdir":
+      output = await removeDirectory(args, currentDirectory);
+      break;
+    case "ls":
+    case "dir":
+      upperDoc.appendChild(currentDirectory.listItems(shell.dirStack.address));
 
       break;
+    case "clear":
+      upperDoc.innerHTML = "";
+      break;
+    default: {
+      // TODO: implement proper Exceptions
+      output =
+        spanText(theme.red, "Unknown Command: ", "bold") +
+        spanText(theme.white, exe, "300");
+      break;
     }
-    output != "" ? displayOutput(output, upperDoc) : null;
+  }
+  output != "" ? displayOutput(output, upperDoc) : null;
 }
-export function displayOutput(output) {}
+function displayOutput(output, upperDoc) {
+  console.log("@displayOutput: ", output);
+  let d = document.createElement("div");
+  d.innerHTML = output;
+  upperDoc.appendChild(d);
+}
+function spanText(color, text, boldness) {
+  let weight = boldness == null ? "" : "font-weight:" + boldness + " ;";
+
+  return (
+    '<span style="color: ' + color + ";" + weight + ' ">' + text + "</span>"
+  );
+}

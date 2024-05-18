@@ -1,7 +1,7 @@
-import { getCurrentTime } from "../utils/date_service";
-import mockData from "./../mockdata.json";
-import {  getUsername} from "../utils/user";
-//import { user } from "../init_data";
+import { getCurrentTime, getRedeableDate } from "../utils/date_service";
+
+import {  getUsername} from "../../../../src/user/user_api";
+
 
 // @TODO: complete dis
 
@@ -30,6 +30,7 @@ export class Directory {
   }
   addDirectory(directory) {
     this.directories.push(directory);
+    this.dateModified = getCurrentTime()
   }
   get id() {
     return this._id;
@@ -37,7 +38,7 @@ export class Directory {
   get path() {
     return this._path;
   }
-
+  
   set path(newPath) {
     this._path = newPath;
     // Optionally update the ID if needed
@@ -46,13 +47,16 @@ export class Directory {
   removeDirectory(directory) {
     // TODO: Implement all Cases.
     this.directories.pop(directory);
+    this.dateModified = getCurrentTime()
   }
   addFile(files) {
     this.files.push(files);
+    this.dateModified = getCurrentTime()
   }
   removeFile(files) {
     // TODO: Implement all Cases.
     this.files.pop(files);
+    this.dateModified = getCurrentTime()
   }
   getNumOfItems() {
     return this.directories.length + this.files.length;
@@ -85,7 +89,7 @@ export class Directory {
     this.directories.forEach((dir) => {
       const row = directoryBody.insertRow();
       row.insertCell().textContent = "d_____";
-      row.insertCell().textContent = dir.dateModified;
+      row.insertCell().textContent = getRedeableDate(dir.dateModified);
       row.insertCell().textContent = dir.size;
       row.insertCell().textContent = dir.name;
       table.appendChild(row);
@@ -93,7 +97,7 @@ export class Directory {
     this.files.forEach((file) => {
       const row = directoryBody.insertRow();
       row.insertCell().textContent = file.type;
-      row.insertCell().textContent = file.dateModified;
+      row.insertCell().textContent = getRedeableDate(file.dateModified);
       row.insertCell().textContent = file.size;
       row.insertCell().textContent = file.name;
       table.appendChild(row);
@@ -105,15 +109,6 @@ export class Directory {
     throw Error("UnImplemented Error | Directory.listItems()");
   }
 }
-// const _R = new Directory({
-//   name: "~",
-//   path: "~",
-//   directories: [],
-//   files: [],
-//   dateCreated: Date(),
-//   dateModified: Date(),
-// });
-// export default _R;
 
 // export const _ROOT_ = new Directory({
 //   id: mockData.id,

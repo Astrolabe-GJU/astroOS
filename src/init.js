@@ -8,7 +8,7 @@ import { createIfGuestUser } from "./user/user_api";
 document.addEventListener("DOMContentLoaded", async () => {
   const loadingElement = document.querySelector(".loading");
   const loadedContentElement = document.querySelector(".loaded-content");
-
+  
   console.log("@app Loading App.... ");
   // Show loading animation
   loadingElement.style.display = "block";
@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await createIfGuestUser()
       .then((result) => {
+        console.log('@inintttt' + `${result}`);
         let res = result;
         res == "user"
           ? console.log("Guest account exists")

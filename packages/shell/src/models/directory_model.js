@@ -119,7 +119,7 @@ export class Directory {
 //   dateCreated: getCurrentTime(),
 //   dateModified: getCurrentTime(),
 // });
-function nestDirectories(directories) {
+function  nestDirectories(directories) {
   const directoryMap = new Map();
 
   // Initialize map
@@ -161,23 +161,57 @@ function convertToDirectoryModel(directory) {
     dateModified: directory.dateModified,
   });
 }
+async function syncDirectories(_rootDir, rootDirectory) {
+  // Function to copy properties from _rootDir to rootDirectory
+  const syncProperties = (source, target) => {
+    target.directories = source.directories;
+    target.files = source.files;
+    target.size = source.size;
+    target.dateCreated = source.dateCreated;
+    target.dateModified = source.dateModified;
+  };
+
+  // Sync the properties for the root directories
+  syncProperties(_rootDir, rootDirectory);
+
+  // Recursively sync the properties for all child directories
+  const syncChildDirectories = (sourceDirs, targetDirs) => {
+    for (let i = 0; i < sourceDirs.length; i++) {
+      // Ensure there is a corresponding target directory
+      if (targetDirs[i]) {
+        syncProperties(sourceDirs[i], targetDirs[i]);
+        // Recursively sync child directories
+        syncChildDirectories(sourceDirs[i].directories, targetDirs[i].directories);
+      }
+    }
+  };
+
+  // Call the recursive sync function for child directories
+  syncChildDirectories(_rootDir.directories, rootDirectory.directories);
+}
 
 const user = await getUsername();
 export const _ROOT_ = async (rootDirectory) => {
+  console.log("//_ROOT/////////////////////////");
   const dirs = await getDirectoriesFromIndexedDB();
+  console.log(":::::dirs::::::::::::", dirs);
   const directoryModels = dirs.map(convertToDirectoryModel);
+  console.log(":::::directoryModels::::::::::::", directoryModels);
   const nestedDirectories = nestDirectories(directoryModels);
+  console.log(":::::nestedDirectories::::::::::::", nestedDirectories);
 
   const _rootDir = nestedDirectories.length > 0 ? nestedDirectories[0] : null;
 
-  console.log("🌐 bef dis", _rootDir);
+  // console.log("🌐 bef dis", _rootDir);
   console.log("🌐 bef dis", rootDirectory);
-  rootDirectory.directories = _rootDir.directories;
-  rootDirectory.files = _rootDir.files;
-  rootDirectory.size = _rootDir.size;
-  rootDirectory.dateCreated = _rootDir.dateCreated;
-  rootDirectory.dateModified = _rootDir.dateModified;
+  await syncDirectories(_rootDir, rootDirectory);
+  // rootDirectory.directories = _rootDir.directories;
+  // rootDirectory.files = _rootDir.files;
+  // rootDirectory.size = _rootDir.size;
+  // rootDirectory.dateCreated = _rootDir.dateCreated;
+  // rootDirectory.dateModified = _rootDir.dateModified;
   console.log("🌐 after dis", rootDirectory);
+  return _rootDir;
 };
 
 export const rootDirectory = new Directory({
@@ -190,3 +224,5 @@ export const rootDirectory = new Directory({
   dateModified: getCurrentTime(),
   size: 0,
 });
+
+// currentDirectory.addDirectory(newDirectory, currentDirectory);

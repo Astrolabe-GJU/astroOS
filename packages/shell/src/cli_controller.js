@@ -5,11 +5,12 @@ import {
 } from "./repo/shell_api";
 import theme from "./theme.json";
 export async function parseAndExecuteCommand(command, upperDoc, shell) {
+  console.log(shell);
   let tokens = command.toLowerCase().split(" ");
   let exe = tokens[0];
   let args = tokens.slice(1);
   let currentDirectory = shell.dirStack.peek();
-  console.log("xxxxxxxxxxxx", currentDirectory, shell);
+  console.log("Current Directory: ", currentDirectory);
   let output = "",
     res = "";
 
@@ -19,13 +20,15 @@ export async function parseAndExecuteCommand(command, upperDoc, shell) {
     case "cd":
       res = await changeDirectory(args, currentDirectory, shell.dirStack);
       //res.status;
-      console.log("@md --changeDirectory");
+      console.log("@cd --changeDirectory");
       console.log(currentDirectory);
       break;
-    case "md":
-    case "mkdir":
+      case "md":
+      case "mkdir":
+      console.log("@md --changeDirectory");
+      console.log(currentDirectory);
       res = await makeDirectory(args, currentDirectory);
-      console.log("@md --currentDirectory");
+      
       // console.log("@CLiController --mkdir", res);
       res.status == 200
         ? null

@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Display loaded content
     loadedContentElement.style.display = "block";
-    displayDirectories([_ROOT_], loadedContentElement);
+    // displayDirectories([_ROOT_], loadedContentElement);
   } catch (error) {
     console.error("Error loading directories:", error);
     loadingElement.textContent = "Failed to load data";

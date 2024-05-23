@@ -26,7 +26,7 @@ export function changeDirectory(args, currentDirectory, dirStack) {
   //--------------
   // Find the directory object based on the target argument
   const targetDirectory = findDirectory(target, currentDirectory);
-
+  console.log("@shell_API :: targetDirectory", targetDirectory);
   // If targetDirectory is found, push it to the dirStack
   if (targetDirectory) {
     dirStack.push(targetDirectory);
@@ -79,7 +79,7 @@ export async function makeDirectory(args, currentDirectory) {
       dateCreated: getCurrentTime(),
       dateModified: getCurrentTime(),
     });
-
+    console.log("@makeDirectory :: shell_api :: 😃",newDirectory);
     await createDirectoryDb(newDirectory, currentDirectory.id)
       .then((result) => {
         // add to parent children
@@ -142,10 +142,14 @@ export async function removeDirectory(args, currentDirectory) {
 
 // Helper function to find the directory object based on its name
 function findDirectory(target, currentDirectory) {
+  console.log("@findDirectory ::");
+  console.log("target ::", target);
+  console.log("currentDirectory ::", currentDirectory);
   // Loop through the directories in the current directory
   for (const directory of currentDirectory.directories) {
     // If the name matches the target, return the directory object
     if (directory.name === target) {
+      console.log("@@directory: ", directory);
       return directory;
     }
   }

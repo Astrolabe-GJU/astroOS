@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: aliceblue;
+    font-family: "Montserrat", sans-serif;
+}
+
+h2 {
+    text-align: center;
+}
+
+h3 {
+    margin-left: 10px;
+}
+
+.setup {
+    margin-left: 10px;
+}
+
+.look {
+    margin: 10px 0;
+    padding: 8px;
+    width: 15%;
+    font-family: "Montserrat", sans-serif;
+    margin-left: 22%;
+}
+
+.size {
+    margin: 10px;
+    padding: 8px;
+    width: 15%;
+    font-family: "Montserrat", sans-serif;
+}
+
+.upper {
+    margin: 10px 0;
+    padding: 8px;
+    width: 10%;
+    background-color: #b7bf20;
+    margin-left: 10px;
+    color: black;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    font-size: 14px;
+}
+
+.upper:hover {
+    background-color: #e17055;
+    transition: background-color 0.6s;
+    color: white;
+}
+
+textarea {
+    width: 800px;
+    height: 350px; /* Corrected height attribute */
+    margin-left: 10%;
+    font-family: "Montserrat", sans-serif;
+}
+
+input[type="button"], input[type="reset"] {
+    margin: 15px 0;
+    padding: 10px;
+    width: 15%;
+    color: black;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    margin-left: 2%; /* Adjusted to ensure buttons are close to each other */
+}
+
+input[type="reset"] {
+    background-color: #e17055;
+}
+
+input[type="button"].normal {
+    background-color: #7ab9ff;
+}

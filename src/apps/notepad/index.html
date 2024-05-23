@@ -1,29 +1,96 @@
+
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notepad</title>
-    <style>
-      /* Ensure the body and html elements take full height */
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        font-family: "Rubik", Arial, sans-serif;
-      }
-      @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
-      /* Style the iframe to take the full size of the parent */
-    </style>
-  </head>
-  <body>
-    <h1>Notepad</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ab
-      <span style="font-weight: bold;color: coral;">assumenda</span> ex laborum vero, aliquam neque eaque accusantium iste ratione
-      odio architecto explicabo necessitatibus ea ipsa velit id eligendi?
-      Inventore.
-    </p>
-  </body>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>notes_1200</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Notepad 1200</h2>
+    <h3>Tools</h3>
+    <div class="setup">
+        <select class="look" onchange="changeFont(this)">
+            <option value="Arial">Arial</option>
+            <option value="Sans Serif">Sans Serif</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Trebuchet MS">Trebuchet MS</option>
+            <option value="Arial Black">Arial Black</option>
+            <option value="Impact">Impact</option>
+            <option value="Bookman">Bookman</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Garamond">Garamond</option>
+            <option value="Palatino">Palatino</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Montserrat">Montserrat</option>
+        </select>
+        <select class="size" onchange="changeSize(this)">
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+            <option>14</option>
+            <option>16</option>
+            <option>18</option>
+            <option>20</option>
+            <option>22</option>
+            <option>24</option>
+            <option>26</option>
+            <option>28</option>
+            <option>36</option>
+            <option>48</option>
+        </select>
+        <input type="button" value="Bold" class="upper" onclick="toggleBold()">
+        <input type="button" value="Italic" class="upper" onclick="toggleItalic()">
+        <input type="button" value="Underline" class="upper" onclick="toggleUnderline()">
+        <br><br>
+        <textarea placeholder="Enter your text here ..." id="content" rows="20" cols="100"></textarea>
+        <input type="reset" value="Clear" class="upper" onclick="remove()">
+        <input type="button" value="Reset" class="normal" onclick="Reset()">
+    </div>
+    <script type="text/javascript">
+        function changeFont(font) {
+            document.getElementById('content').style.fontFamily = font.value;
+        }
+
+        function changeSize(n) {
+            var s = document.getElementById('content');
+            s.style.fontSize = n.value + 'px';
+        }
+
+        function toggleBold() {
+            var content = document.getElementById('content');
+            var currentWeight = content.style.fontWeight;
+            content.style.fontWeight = currentWeight === 'bold' ? 'normal' : 'bold';
+        }
+
+        function toggleItalic() {
+            var content = document.getElementById('content');
+            var currentStyle = content.style.fontStyle;
+            content.style.fontStyle = currentStyle === 'italic' ? 'normal' : 'italic';
+        }
+
+        function toggleUnderline() {
+            var content = document.getElementById('content');
+            var currentDecoration = content.style.textDecoration;
+            content.style.textDecoration = currentDecoration === 'underline' ? 'none' : 'underline';
+        }
+        function Reset() {
+    
+    document.getElementById("content").style.fontStyle = "normal";
+    document.getElementById("content").style.textDecoration = "none";
+    document.getElementById("content").style.fontWeight = "normal";
+}
+
+function remove() {
+    
+    document.getElementById("content").value = "";
+}
+
+    </script>
+</body>
 </html>

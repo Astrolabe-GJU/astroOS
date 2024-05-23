@@ -1,0 +1,6 @@
+[submodule "src/apps/src/apps/2048"]
+	path = src/apps/src/apps/2048
+	url = https://github.com/gd4Ark/2048.git
+[submodule "src/apps/src/apps/pacman"]
+	path = src/apps/src/apps/pacman
+	url = https://github.com/mumuy/pacman.git

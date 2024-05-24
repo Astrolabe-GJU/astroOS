@@ -20,11 +20,11 @@
     --selectionBackground: #1f2233;
     --cursorColor: #ffcc00;
   }
-  
+
   * {
     background-color: var(--background);
     font-family: monospace;
-    font-size: 12;
+    font-size:  20px;
     color: var(--white);
   }
   

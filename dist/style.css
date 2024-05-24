@@ -8,6 +8,9 @@
   --bg-primary: #23232e;
   --bg-secondary: #141418;
   --transition-speed: 600ms;
+  
+  --secondary-color: #0D0C22;
+  --red-color:#e34f61;
 
   --stroke-stop1: rgba(244, 178, 228, 0.5);
   --stroke-stop2: rgba(180, 125, 174, 0.5);
@@ -20,6 +23,9 @@
   --container-gradient2-stop2: rgba(255, 255, 255, 0.04);
 
   --shadow-color: rgba(0, 0, 0, 0.2);
+
+  --search-bar-bg: rgba(32, 5, 36, 0.4);
+  --border-radius: 20px;
 }
 body,
 html {
@@ -46,14 +52,14 @@ html {
 
   left: 50%;
   bottom: 0;
-  width: 360px;
-  height: 4dvh;
+  width: 550px;
+  height: 60px;
   background-color: rgba(51, 51, 51, 0.9);
   display: flex;
   flex-direction: row;
   align-items: center;
   padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-right: 32px;
   margin-bottom: 0.3rem;
   z-index: 2; /* Higher z-index to place it above the wallpaper */
   transform: translateX(-50%); /* Center the app bar vertically */
@@ -69,7 +75,7 @@ html {
 
   /* background-color: rgba(51, 51, 51, 0.9); */
   display: flex;
-  
+
   flex-direction: column;
   align-items: center;
   padding-top: 0.5rem;
@@ -80,8 +86,7 @@ html {
   border-radius: 10rem; /* Border radius for rounded corners */
 }
 
-.app-bar::before,
-.task-bar::before {
+.app-bar::before {
   content: "";
   position: absolute;
   top: -1px;
@@ -101,9 +106,31 @@ html {
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
 }
+.task-bar::before,
+.search-bar::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  border-radius: inherit; /* Ensures the border radius matches the parent */
+  padding: 1px; /* Stroke width */
+  background: linear-gradient(
+    180deg,
+    var(--stroke-stop1) 0%,
+    var(--stroke-stop2) 35%,
+    var(--stroke-stop3) 57%,
+    var(--stroke-stop4) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
 
 .app-bar > *,
-.task-bar > * {
+.task-bar > *,
+.search-bar > * {
   position: relative;
   z-index: 3;
 }
@@ -120,15 +147,19 @@ html {
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s; */
-  width: 100%;
-  height: 100%;
+  width: 50px;
+  height: 50px;
 
   background-color: transparent;
   color: white;
   display: flex;
+
   align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
+  justify-content: space-evenly;
+  padding-right: 1rem;
+  padding-left: 1rem;
+
+  /* margin-bottom: 10px; */
   cursor: pointer;
   border-radius: 20rem;
   transition: background-color 0.3s;
@@ -141,7 +172,8 @@ html {
 .app-icon-vscode,
 .app-icon-gju,
 .app-icon-lichess,
-.app-icon-krunker {
+.app-icon-weather,
+.app-icon-calculator {
   /* width: 40px;
   height: 40px;
   background-color: transparent;
@@ -176,10 +208,16 @@ html {
 .app-icon-vscode:hover,
 .app-icon-gju:hover,
 .app-icon-lichess:hover,
-.app-icon-krunker:hover, .task-icon:hover {
-  background-color: #777;
+.app-icon-calculator:hover,
+.app-icon-weather:hover,
+.task-icon:hover {
+  background-color: var(--secondary-color);
 }
+.search-icon:hover{
+  cursor: pointer;
+  background-color: var(--bg-secondary);
 
+}
 .desktop {
   /* margin-left: 60px; */
   width: 100%;
@@ -208,14 +246,40 @@ html {
   left: 10%;
   width: 80%;
   height: 80%;
-  background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   z-index: 3; /* Higher z-index to place it above the wallpaper */
+  
+  /* border: 1px solid #ccc; */
+  background-color: rgba(51, 51, 51, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.window-frame::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  border-radius: inherit; /* Ensures the border radius matches the parent */
+  padding: 1px; /* Stroke width */
+  background: linear-gradient(
+    180deg,
+    var(--stroke-stop1) 0%,
+    var(--stroke-stop2) 35%,
+    var(--stroke-stop3) 57%,
+    var(--stroke-stop4) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+.window-frame > *{
+    position: relative;
+    z-index: 3;
+  
+}
 .window-frame.minimized {
   display: none;
 }
@@ -226,15 +290,56 @@ html {
   width: 100%;
   height: 100%;
 }
-
+.window-controls .minimize-btn:hover,
+.window-controls .maximize-btn:hover{
+  border-radius: 20px; /* Top right radius of 10px */
+  background-color: var(--secondary-color);
+}
+.window-controls .close-btn:hover{
+  border-radius: 20px;
+  background-color: var(--red-color);
+}
 .title-bar {
-  background-color: #444;
   color: white;
   padding: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  /* padding-right: 20px; */
+  border-radius: 20px 20px 0px 0px;
+
+  box-shadow: 0 4px 24px -1px var(--shadow-color); /* Drop shadow */
+  backdrop-filter: blur(40px); /* Background blur */
+  background: linear-gradient(
+      180deg,
+      var(--container-gradient1-stop1) 0%,
+      var(--container-gradient1-stop2) 100%
+    ),
+    linear-gradient(
+      180deg,
+      var(--container-gradient2-stop1) 0%,
+      var(--container-gradient2-stop2) 100%
+    );
 }
+.title-bar svg{
+  width: 24px;
+  height: 24px;
+}
+.title-text {
+  margin-left: 20px;
+  font-family: "Rubik";
+  font-weight: 300;
+  font-size: 18;
+}
+
+
+.window-controls {
+  display: flex;
+  gap: 10px; /* Adjust the gap between buttons if needed */
+  padding-right: 10px;
+}
+
 
 .window-controls button {
   background: none;
@@ -242,21 +347,25 @@ html {
   color: white;
   font-size: 1em;
   cursor: pointer;
-  margin-left: 5px;
+  /* margin-left: 5px; */
+
+
+  
+  
+  padding: 5px; /* Ensures the button covers the padding area */
 }
 
 .content-frame {
   flex-grow: 1;
   border: none;
   overflow: auto;
+
+  border-radius: 0px  0 15px 15px;
 }
 
-.title-text {
-  font-size: smaller;
-}
+
 /* ::::::::::::::::::::::::::::::::::::::::::::: */
 .container-fill {
-  
   border-radius: 20px; /* Optional: Add border radius if needed */
   box-shadow: 0 4px 24px -1px var(--shadow-color); /* Drop shadow */
   backdrop-filter: blur(40px); /* Background blur */
@@ -270,4 +379,54 @@ html {
       var(--container-gradient2-stop1) 0%,
       var(--container-gradient2-stop2) 100%
     );
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-items: flex-start;
+  width: 270px;
+  height: 40px;
+  background-color: #0d0c22;
+  border-radius: 20px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 32px;
+}
+
+.search-icon svg {
+  width: 24px; /* Adjust this size according to your SVG */
+  height: 24px; /* Adjust this size according to your SVG */
+  transform: rotate(90deg);
+}
+.search-icon {
+  margin-right: 10px;
+}
+
+.search-input {
+  flex-grow: 1;
+  border: none;
+  background: transparent;
+  border-radius: 20px;
+  color: rgba(255, 255, 255, 1);
+  font-family: "Kanit", sans-serif;
+  font-weight: 300; /* ExtraLight */
+  font-size: 13px;
+  margin-right: 1rem;
+  outline: none;
+}
+.search-input:focus {
+  border: none; /* Ensure no border is shown on focus */
+  outline: none; /* Ensure no outline is shown on focus */
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.9);
+  font-family: "Kanit", sans-serif;
+  font-weight: 100; /* ExtraLight */
+}
+
+.task-icon svg {
+  width: 24px;
+  height: 24px;
 }

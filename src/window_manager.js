@@ -7,7 +7,7 @@ export class WindowManager {
 
   createWindow(title, url) {
     const windowFrame = document.createElement('div');
-    windowFrame.className = 'window-frame';
+    windowFrame.className = 'window-frame container-fill';
 
     const titleBar = document.createElement('div');
     titleBar.className = 'title-bar';

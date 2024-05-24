@@ -1,53 +1,34 @@
 // :::::AppBar::::::::::::::::::::::::::
-export function getAppStorePath() {
-  return `../src/apps/appstore/appstore.html`;
-}
-export function getNotePadPath() {
-  return `../src/apps/notepad/notepad.html`;
-}
-export function getCalculatorPath() {
-  return `../src/apps/calculator/calculator.html`;
-}
-export function getWeatherAppPath() {
-  return `../src/apps/weather/weather.html`;
-}
-export function getLichessPath() {
-  return `../src/apps/lichess/lichess.html`;
-}
-export function getMyGJUPath() {
-  return `../src/apps/mygju/mygju.html`;
-}
-export function getGJUPath() {
-  return `../src/apps/gju/gju.html`;
-}
-export function getVSCodePath() {
-  return `../src/apps/code/code.html`;
-}
-export function getPhotopeaPath() {
-  return `../src/apps/photopea/photopea.html`;
-}
+export const getAppStorePath = `../src/apps/appstore/appstore.html`;
+
+export const getNotePadPath = `../src/apps/notepad/notepad.html`;
+
+export const getCalculatorPath = `../src/apps/calculator/calculator.html`;
+
+export const getWeatherAppPath = `../src/apps/weather/weather.html`;
+
+export const getLichessPath = `../src/apps/lichess/lichess.html`;
+
+export const getMyGJUPath = `../src/apps/mygju/mygju.html`;
+
+export const getGJUPath = `../src/apps/gju/gju.html`;
+
+export const getVSCodePath = `../src/apps/code/code.html`;
+
+export const getPhotopeaPath = `../src/apps/photopea/photopea.html`;
 
 // :::::TaskBar::::::::::::::::::::::::::
-export function getFileExplorerPath() {
-  return `../src/apps/file-explorer/file-explorer.html`;
-}
-export function getTerminalPath() {
-  return `../src/apps/terminal/terminal.html`;
-}
-export function getAccountPath() {
-  return `../src/apps/account/account.html`;
-}
+export const getFileExplorerPath = `../src/apps/file-explorer/file-explorer.html`;
+
+export const getTerminalPath = `../src/apps/terminal/terminal.html`;
+
+export const getAccountPath = `../src/apps/account/account.html`;
 
 // :::::Games::::::::::::::::::::::::::
-export function get2048Path() {
-  return `../src/apps/2048/2048.html`;
-}
-export function getMinesweeperPath() {
-  return `../src/apps/minesweeper/minesweeper.html`;
-}
-export function getPacmanPath() {
-  return `../src/apps/pacman/pacman.html`;
-}
-export function getGamePath() {
-  return `../src/apps/game/game.html`;
-}
+export const get2048Path = `../src/apps/2048/2048.html`;
+
+export const getMinesweeperPath = `../src/apps/minesweeper/minesweeper.html`;
+
+export const getPacmanPath = `../src/apps/pacman/pacman.html`;
+
+export const getGamePath = `../src/apps/game/game.html`;

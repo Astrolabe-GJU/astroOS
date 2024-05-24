@@ -4,7 +4,20 @@ import { saveUserAccount } from "./user/user_api";
 import { createAppBar } from "./appbar";
 import { createTaskBar } from "./taskbar";
 import { WindowManager } from "./window_manager";
-import { getAppStorePath, getMyGJUPath } from "./apps-list";
+import {
+  getAccountPath,
+  getAppStorePath,
+  getCalculatorPath,
+  getFileExplorerPath,
+  getGJUPath,
+  getLichessPath,
+  getMyGJUPath,
+  getNotePadPath,
+  getPhotopeaPath,
+  getTerminalPath,
+  getVSCodePath,
+  getWeatherAppPath,
+} from "./apps-list";
 document.addEventListener("DOMContentLoaded", () => {
   createAppBar();
   createTaskBar();
@@ -13,34 +26,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", (event) => {
     if (event.ctrlKey && event.key === "y") {
-      const shell = document.querySelector(".shell");
-      shell.classList.toggle("hidden");
+      windowManager.createWindow("Terminal", getTerminalPath);
     }
   });
 
   // appBar Buttons
-  document.querySelectorAll(".task-icon").forEach((icon, index) => {
+  document.querySelectorAll(".app-icon").forEach((icon, index) => {
     clickAppButton(windowManager, index, icon);
   });
-
-  document.querySelectorAll(".app-icon-mygju").forEach((icon, index) => {
-    icon.addEventListener("click", () => {
-      console.log("📄📄📄📄📄📄📄");
-      windowManager.createWindow(`MyGJU`, "../src/apps/mygju/mygju.html");
-    });
-  });
-
-  document.querySelectorAll(".app-icon-photopea").forEach((icon, index) => {
-    icon.addEventListener("click", () => {
-      console.log("📄📄📄📄📄📄📄");
-      windowManager.createWindow(`Photopea`, `https://photopea.com`);
-    });
-  });
-
-  document.querySelectorAll(".app-icon-notepad").forEach((icon, index) => {
-    icon.addEventListener("click", () => {
-      windowManager.createWindow(`Notepad`, `../src/apps/notepad/index.html`);
-    });
+  // taskBar Icon Buttons
+  document.querySelectorAll(".task-icon").forEach((icon, index) => {
+    clickTaskButton(windowManager, index, icon);
   });
 });
 
@@ -48,27 +44,27 @@ export function clickAppButton(windowManager, index, icon) {
   switch (index) {
     case 0:
       icon.addEventListener("click", () => {
-        windowManager.createWindow(`AppStore`, getMyGJUPath);
+        windowManager.createWindow(`AppStore`, getAppStorePath);
       });
       break;
     case 1:
       icon.addEventListener("click", () => {
-        windowManager.createWindow(`NotePad`, getMyGJUPath);
+        windowManager.createWindow(`NotePad`, getNotePadPath);
       });
       break;
     case 2:
       icon.addEventListener("click", () => {
-        windowManager.createWindow(`Calculator`, getMyGJUPath);
+        windowManager.createWindow(`Calculator`, getCalculatorPath);
       });
       break;
     case 3:
       icon.addEventListener("click", () => {
-        windowManager.createWindow(`Weather`, getMyGJUPath);
+        windowManager.createWindow(`Weather`, getWeatherAppPath);
       });
       break;
     case 4:
       icon.addEventListener("click", () => {
-        windowManager.createWindow(`Lichess`, getMyGJUPath);
+        windowManager.createWindow(`Lichess`, getLichessPath);
       });
       break;
     case 5:
@@ -78,17 +74,17 @@ export function clickAppButton(windowManager, index, icon) {
       break;
     case 6:
       icon.addEventListener("click", () => {
-        windowManager.createWindow(`GJU`, getMyGJUPath);
+        windowManager.createWindow(`GJU`, getGJUPath);
       });
       break;
     case 7:
       icon.addEventListener("click", () => {
-        windowManager.createWindow(`Code`, getMyGJUPath);
+        windowManager.createWindow(`Code`, getVSCodePath);
       });
       break;
     case 8:
       icon.addEventListener("click", () => {
-        windowManager.createWindow(`Photo Editor`, getMyGJUPath);
+        windowManager.createWindow(`Photo Editor`, getPhotopeaPath);
       });
       break;
 
@@ -96,7 +92,28 @@ export function clickAppButton(windowManager, index, icon) {
       break;
   }
 }
+export function clickTaskButton(windowManager, index, icon) {
+  switch (index) {
+    case 0:
+      icon.addEventListener("click", () => {
+        windowManager.createWindow(`File Explorer`, getFileExplorerPath);
+      });
+      break;
+    case 1:
+      icon.addEventListener("click", () => {
+        windowManager.createWindow(`Terminal`, getTerminalPath);
+      });
+      break;
+    case 2:
+      icon.addEventListener("click", () => {
+        windowManager.createWindow(`Account`, getAccountPath);
+      });
+      break;
 
+    default:
+      break;
+  }
+}
 //await initOS();
 
 // @toBeDeleted later

@@ -5,7 +5,9 @@
 
 
 ### Description
-*Anything that can built in Javascript, will be built in Javascript.*
+> *Anything that can built in Javascript, will be built in Javascript.*
+> 
+
 <p>
 A Semi-OS running natively on the Web (using vanilla JS). This project is inspired by <a href="https://puter.com">Puter</a>. 
 This project is intended as a showcase, not intentions yet of making it a production-ready App.

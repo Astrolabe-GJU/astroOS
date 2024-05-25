@@ -244,8 +244,10 @@ html {
   background-color: rgba(51, 51, 51, 0.9);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
+
   /**/
   transition: all 0.1s;
+
 }
 
 .window-frame::before {
@@ -284,7 +286,6 @@ html {
   
   width: 100%;
   height: 100%;
-
 
 }
 .window-controls .minimize-btn:hover,
@@ -328,7 +329,7 @@ html {
   font-family: "Rubik";
   font-weight: 300;
   font-size: 18;
-}
+
 
 
 .window-controls {

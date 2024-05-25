@@ -1,3 +1,4 @@
+
 <div align="center" >
 <img src='./public/astrolabe-logo.png' alt='logo' width='64' height='64'>
 <h1><strong>AstroOS</strong> ✨</h1>
@@ -5,8 +6,11 @@
 <img src='./public/demo.png' alt='astroOS desktop'>
 </div>
 
+
+
 > [!NOTE]  
 > This project is currently under development.
+
 
 ---
 
@@ -23,14 +27,17 @@
 
 > _Anything that can built in Javascript, will be built in Javascript._
 
+
 <p>
 A Semi-OS running natively on the Web (using vanilla JS). This project is inspired by <a href="https://puter.com">Puter</a>. 
 This project is intended as a showcase, not intentions yet of making it a production-ready App.
 </p>
 
+
 ---
 
 ### development
+
 
 to install dependencies (requires nodejs)
 

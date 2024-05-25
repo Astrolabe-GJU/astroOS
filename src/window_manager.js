@@ -8,9 +8,12 @@ export class WindowManager {
   createWindow(title, url) {
     const windowFrame = document.createElement('div');
     windowFrame.className = 'window-frame container-fill';
+    // @TODO
     windowFrame.style.position = 'absolute';
-    windowFrame.style.top = '10%';
-    windowFrame.style.left = '10%';
+//     windowFrame.style.top = '10%';
+//     windowFrame.style.left = '10%';
+
+
 
     const titleBar = document.createElement('div');
     titleBar.className = 'title-bar';

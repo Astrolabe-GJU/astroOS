@@ -20,11 +20,12 @@
     --selectionBackground: #1f2233;
     --cursorColor: #ffcc00;
   }
-  
+
   * {
-    background-color: var(--background);
+    /* background-color: var(--background); */
+    
     font-family: monospace;
-    font-size: 12;
+    font-size:  20px;
     color: var(--white);
   }
   
@@ -37,6 +38,8 @@
   }
   
   .terminal-lower-part textarea {
+    background-color: transparent;
+
     border: none;
     outline: none;
     caret-color: var(--cursorColor);

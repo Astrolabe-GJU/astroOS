@@ -1,4 +1,9 @@
-<h1 align="center"><strong>AstroOS</strong> ✨</h1>
+<div align="center" >
+<img src='./public/astrolabe-logo.png' alt='logo' width='64' height='64'>
+<h1><strong>AstroOS</strong> ✨</h1>
+<img src='./public/desktop.png' alt='desktop'>
+<img src='./public/demo.png' alt='astroOS desktop'>
+</div>
 
 > [!NOTE]  
 > This project is currently under development.
@@ -43,6 +48,9 @@ npm run build
 
 ### Design System
 
+<div align='center'>
+<img src='./public/design-system.png' alt='design system preview'>
+ </div>
 We've created a Simple Design System to follow for creating native Apps, it has these utility classes:
 
 1. Main Action Button

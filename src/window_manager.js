@@ -8,6 +8,12 @@ export class WindowManager {
   createWindow(title, url) {
     const windowFrame = document.createElement('div');
     windowFrame.className = 'window-frame container-fill';
+    // @TODO
+    windowFrame.style.position = 'absolute';
+//     windowFrame.style.top = '10%';
+//     windowFrame.style.left = '10%';
+
+
 
     const titleBar = document.createElement('div');
     titleBar.className = 'title-bar';
@@ -28,7 +34,6 @@ export class WindowManager {
 
     const maximizeBtn = document.createElement('button');
     maximizeBtn.className = 'maximize-btn';
-    // maximizeBtn.textContent = '□';
     maximizeBtn.innerHTML = svgMaximize;
     maximizeBtn.onclick = () => {
       windowFrame.classList.toggle('maximized');
@@ -56,5 +61,33 @@ export class WindowManager {
     windowFrame.appendChild(contentFrame);
 
     this.desktop.appendChild(windowFrame);
+
+    this.makeWindowDraggable(windowFrame, titleBar);
+  }
+
+  makeWindowDraggable(windowFrame, titleBar) {
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    titleBar.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      offsetX = e.clientX - windowFrame.getBoundingClientRect().left;
+      offsetY = e.clientY - windowFrame.getBoundingClientRect().top;
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+    });
+
+    const onMouseMove = (e) => {
+      if (isDragging) {
+        windowFrame.style.left = `${e.clientX - offsetX}px`;
+        windowFrame.style.top = `${e.clientY - offsetY}px`;
+      }
+    };
+
+    const onMouseUp = () => {
+      isDragging = false;
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
   }
 }

@@ -6,7 +6,7 @@ import { Shell } from "./models/shell_model";
 ///
 import { rootDirectory, _ROOT_ } from "./models/directory_model";
 
-const _rootDir = await _ROOT_(rootDirectory);
+ const _rootDir = await _ROOT_(rootDirectory);
 
 const shell = new Shell();
 

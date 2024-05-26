@@ -1,7 +1,7 @@
 import { getCurrentTime, getRedeableDate } from "../utils/date_service";
 
 import { getUsername } from "../../../../src/user/user_api";
-import { getDirectoriesFromIndexedDB } from "./../repo/directories_api";
+import { createIfRootDir, getDirectoriesFromIndexedDB } from "./../repo/directories_api";
 
 // @TODO: complete dis
 
@@ -119,7 +119,7 @@ export class Directory {
 //   dateCreated: getCurrentTime(),
 //   dateModified: getCurrentTime(),
 // });
-function  nestDirectories(directories) {
+function nestDirectories(directories) {
   const directoryMap = new Map();
 
   // Initialize map
@@ -204,14 +204,17 @@ export const _ROOT_ = async (rootDirectory) => {
 
   // console.log("🌐 bef dis", _rootDir);
   console.log("🌐 bef dis", rootDirectory);
-  await syncDirectories(_rootDir, rootDirectory);
-  // rootDirectory.directories = _rootDir.directories;
-  // rootDirectory.files = _rootDir.files;
-  // rootDirectory.size = _rootDir.size;
-  // rootDirectory.dateCreated = _rootDir.dateCreated;
-  // rootDirectory.dateModified = _rootDir.dateModified;
-  console.log("🌐 after dis", rootDirectory);
-  return _rootDir;
+  if (_rootDir != null) {
+    await syncDirectories(_rootDir, rootDirectory);
+
+    console.log("🌐 after dis", rootDirectory);
+    return _rootDir;
+  }else{
+    // create DIr DB
+    createIfRootDir(rootDirectory, '');
+    return rootDirectory;
+    throw("unimplemenetedERROR")
+  }
 };
 
 export const rootDirectory = new Directory({

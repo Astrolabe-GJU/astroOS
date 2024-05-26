@@ -1,7 +1,7 @@
 import { getCurrentTime, getRedeableDate } from "../utils/date_service";
 
 import { getUsername } from "../../../../src/user/user_api";
-import { getDirectoriesFromIndexedDB } from "./../repo/directories_api";
+import { createIfRootDir, getDirectoriesFromIndexedDB } from "./../repo/directories_api";
 
 // @TODO: complete dis
 
@@ -192,26 +192,29 @@ async function syncDirectories(_rootDir, rootDirectory) {
 
 const user = await getUsername();
 export const _ROOT_ = async (rootDirectory) => {
-  console.log("//_ROOT/////////////////////////");
+  // console.log("//_ROOT/////////////////////////");
   const dirs = await getDirectoriesFromIndexedDB();
-  console.log(":::::dirs::::::::::::", dirs);
+  // console.log(":::::dirs::::::::::::", dirs);
   const directoryModels = dirs.map(convertToDirectoryModel);
-  console.log(":::::directoryModels::::::::::::", directoryModels);
+  // console.log(":::::directoryModels::::::::::::", directoryModels);
   const nestedDirectories = nestDirectories(directoryModels);
-  console.log(":::::nestedDirectories::::::::::::", nestedDirectories);
+  // console.log(":::::nestedDirectories::::::::::::", nestedDirectories);
 
   const _rootDir = nestedDirectories.length > 0 ? nestedDirectories[0] : null;
 
-  // console.log("🌐 bef dis", _rootDir);
-  console.log("🌐 bef dis", rootDirectory);
-  await syncDirectories(_rootDir, rootDirectory);
-  // rootDirectory.directories = _rootDir.directories;
-  // rootDirectory.files = _rootDir.files;
-  // rootDirectory.size = _rootDir.size;
-  // rootDirectory.dateCreated = _rootDir.dateCreated;
-  // rootDirectory.dateModified = _rootDir.dateModified;
-  console.log("🌐 after dis", rootDirectory);
-  return _rootDir;
+  
+  // console.log("🌐 bef dis", rootDirectory);
+  if (_rootDir != null) {
+    await syncDirectories(_rootDir, rootDirectory);
+
+    // console.log("🌐 after dis", rootDirectory);
+    return _rootDir;
+  }else{
+    // create DIr DB
+    createIfRootDir(rootDirectory, '');
+    return rootDirectory;
+  
+  }
 };
 
 export const rootDirectory = new Directory({

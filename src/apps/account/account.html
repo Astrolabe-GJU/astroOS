@@ -1,11 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account</title>
-</head>
-<body>
-    <Header>Hello from Account!</Header>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Account</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      footer {
+        margin-top: auto;
+        height: calc(100dvh - 10dvh);
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        
+      }
+
+      footer p {
+        margin: 0;
+        padding: 10px;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      footer a {
+        color: inherit; /* Inherit the color from the parent element */
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="account-info" class="account-section" style="display: none">
+      <p class="rubik-extra-bold" id="display-username"></p>
+      <p class="rubik-small" id="display-email"></p>
+      <p class="rubik-regular">To log out, please click the Button below</p>
+      <p class="rubik-underline" id="logout-button">Log out</p>
+    </div>
+
+    <div id="signup-form" class="form-section" style="display: none">
+      <p class="rubik-extra-bold">Sign Up</p>
+      <form id="user-form">
+        <div class="auth-fields">
+          <div class="search-bar">
+            <input
+              type="text"
+              id="username"
+              placeholder="Username"
+              class="search-input"
+              required
+            />
+          </div>
+
+          <div class="search-bar">
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              class="search-input rubik-faded"
+              required
+            />
+          </div>
+        </div>
+        <br /><br />
+        <!-- <input type="text" id="username" placeholder="Username" required /> -->
+
+        <button type="submit" class="main-button main-container-fill">
+          <div class="main-button-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill="#f4b2e4"
+                d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"
+              />
+            </svg>
+          </div>
+          <div class="main-button-text">Sign up</div>
+        </button>
+      </form>
+    </div>
+    <footer>
+      <p>
+        astroOS an open-source project, visit our 
+        <a href="https://github.com/astrolabe-gju/astroOS" target="_blank"
+          >GitHub repository</a
+        >
+        for the full source Code.
+      </p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
 </html>

@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   loadingElement.style.display = "block";
   
   try {
-      console.log("@app Creating DB.... ");
+      
       await initDb();
-      console.log("@app Created DB 💪");
+      
       
       await createIfGuestUser()
       .then((result) => {
@@ -27,17 +27,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         const directories = await fetchDirectoriesFromIndexedDB();
         
-        console.log("@app  fetching Directories.... ");
+      
         const directoryModels = directories.map(convertToDirectoryModel);
-        console.log("@app fetched Directories 💪", directoryModels);
+      
         
-        console.log("@app  fetching nested Directories.... ");
+      
         const nestedDirectories = nestDirectories(directoryModels);
-        console.log("@app fetched nested Directories 💪", nestedDirectories);
+      
         
-        console.log("@app  get Root Directory.... ");
+      
         const _ROOT_ = getRootDirectory(nestedDirectories);
-        console.log("@app get Root Directory 💪", _ROOT_);
+      
 
 
       // @TODO: convert Files to File Handles Model ?

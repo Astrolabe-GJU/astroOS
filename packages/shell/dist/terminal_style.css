@@ -37,7 +37,7 @@
     align-items: center;
   }
   
-  .terminal-lower-part textarea {
+  .terminal-lower-part textarea, .terminal-lower-part textarea:focus {
     background-color: transparent;
 
     border: none;

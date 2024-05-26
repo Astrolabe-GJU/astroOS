@@ -27,8 +27,6 @@ export class DirectoryStack extends EventEmitter {
 
   // Method to peek at the current directory
   peek() {
-    console.log('@peek() :: directories', this.directories);
-    console.log('@peek() :: directories[]', this.directories[1]);
     return this.isEmpty()
       ? this._ROOT
       : this.directories[this.directories.length - 1];

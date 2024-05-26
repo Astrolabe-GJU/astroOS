@@ -12,10 +12,10 @@ import {
 export function createAppBar() {
   const appBar = document.getElementById("app-bar");
 
-  const appIconAppStore = document.createElement("div");
-  appIconAppStore.className = "app-icon";
-  appIconAppStore.innerHTML = svgAppStore;
-  appBar.appendChild(appIconAppStore);
+  // const appIconAppStore = document.createElement("div");
+  // appIconAppStore.className = "app-icon";
+  // appIconAppStore.innerHTML = svgAppStore;
+  // appBar.appendChild(appIconAppStore);
 
   const appIconNotepad = document.createElement("div");
   appIconNotepad.className = "app-icon";
@@ -27,10 +27,10 @@ export function createAppBar() {
   appIconCalculator.innerHTML = svgCalculator;
   appBar.appendChild(appIconCalculator);
 
-  const appIconWeather = document.createElement("div");
-  appIconWeather.className = "app-icon";
-  appIconWeather.innerHTML = svgWeather;
-  appBar.appendChild(appIconWeather);
+  // const appIconWeather = document.createElement("div");
+  // appIconWeather.className = "app-icon";
+  // appIconWeather.innerHTML = svgWeather;
+  // appBar.appendChild(appIconWeather);
 
   const appIconLichess = document.createElement("div");
   appIconLichess.className = "app-icon";

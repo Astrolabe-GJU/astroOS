@@ -42,47 +42,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
 export function clickAppButton(windowManager, index, icon) {
   switch (index) {
+    // case 0:
+    //   icon.addEventListener("click", () => {
+    //     windowManager.createWindow(`AppStore`, getAppStorePath);
+    //   });
+    //   break;
     case 0:
-      icon.addEventListener("click", () => {
-        windowManager.createWindow(`AppStore`, getAppStorePath);
-      });
-      break;
-    case 1:
       icon.addEventListener("click", () => {
         windowManager.createWindow(`NotePad`, getNotePadPath);
       });
       break;
-    case 2:
+    case 1:
       icon.addEventListener("click", () => {
         windowManager.createWindow(`Calculator`, getCalculatorPath);
       });
       break;
-    case 3:
-      icon.addEventListener("click", () => {
-        windowManager.createWindow(`Weather`, getWeatherAppPath);
-      });
-      break;
-    case 4:
+    // case 3:
+    //   icon.addEventListener("click", () => {
+    //     windowManager.createWindow(`Weather`, getWeatherAppPath);
+    //   });
+    //   break;
+    case 2:
       icon.addEventListener("click", () => {
         windowManager.createWindow(`Lichess`, getLichessPath);
       });
       break;
-    case 5:
+    case 3:
       icon.addEventListener("click", () => {
         windowManager.createWindow(`MyGJU`, getMyGJUPath);
       });
       break;
-    case 6:
+    case 4:
       icon.addEventListener("click", () => {
         windowManager.createWindow(`GJU`, getGJUPath);
       });
       break;
-    case 7:
+    case 5:
       icon.addEventListener("click", () => {
         windowManager.createWindow(`Code`, getVSCodePath);
       });
       break;
-    case 8:
+    case 6:
       icon.addEventListener("click", () => {
         windowManager.createWindow(`Photo Editor`, getPhotopeaPath);
       });

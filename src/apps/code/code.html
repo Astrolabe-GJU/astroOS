@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Editor</title>
+    <style>
+      body {
+        font-family: monospace;
+        color: #fff;
+      }
+      #editor {
+        width: 100%;
+        height: 100%;
+        border: none;
+        padding: 10px;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        word-break: break-all;
+        outline: none;
+      }
+      .blue {
+        color: #82aaff;
+      }
+      .green {
+        color: #c3e88d;
+      }
+      .red {
+        color: #ff5370;
+      } /* Assuming a red color based on typical highlighting conventions */
+      .purple {
+        color: #c792ea;
+      }
+      .number {
+        color: #ffcb6b;
+      } /* Typical number color */
+      .comment {
+        color: #546e7a;
+        font-style: italic;
+      } /* Typical comment color */
+    </style>
+  </head>
+  <body>
+    <div contenteditable="true" id="editor"></div>
+
+    <script>
+      const blue= '#82aaff';
+      const green = '#c3e88d';
+      const red = '#c3e88d';
+      const purple = '#c792ea';
+    
+      const editor = document.getElementById('editor');
+    
+      editor.addEventListener('input', () => {
+      
+        // Simple syntax highlighting logic
+        let code = editor.innerText;
+        code = code.replace(/(var|let|const|function|if|else|for|while|return|class|new|try|catch|finally|throw|switch|case|default|break|continue|do|import|export|from|as)/g, `<span style="color: ${blue};">$1</span>`);
+        code = code.replace(/('.*?')/g, `<span style="color: ${green};">$1</span>`);
+        code = code
+        .replace(/(\/\/.*?$|\/\*[\s\S]*?\*\/)/gm, `<span class="comment">$1</span>`);
+        code = code.replace(/([{}[\]()])/g, `<span class="purple">$1</span>`);
+
+        code = code.replace(/(\b\d+\.?\d*\b)/g, `<span class="number">$1</span>`);
+
+        editor.innerHTML = code;
+    
+        // Move the cursor to the end
+        const range = document.createRange();
+        const sel = window.getSelection();
+        range.selectNodeContents(editor);
+        range.collapse(false);
+        sel.removeAllRanges();
+        sel.addRange(range);
+      });
+    </script>
+    
+  </body>
+</html>

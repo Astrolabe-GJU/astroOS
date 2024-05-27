@@ -17,6 +17,7 @@ import {
     searchInput.type ='text';
     searchInput.placeholder = 'What are you looking for?';
     searchInput.className = 'search-input';
+    searchInput.id = 'search-input';
 
     searchBar.appendChild(taskIconSearch);
     searchBar.appendChild(searchInput);

@@ -5,14 +5,18 @@ import { createAppBar } from "./appbar";
 import { createTaskBar } from "./taskbar";
 import { WindowManager } from "./window_manager";
 import {
+  get2048Path,
   getAccountPath,
   getAppStorePath,
   getCalculatorPath,
   getFileExplorerPath,
   getGJUPath,
+  getGamePath,
   getLichessPath,
+  getMinesweeperPath,
   getMyGJUPath,
   getNotePadPath,
+  getPacmanPath,
   getPhotopeaPath,
   getTerminalPath,
   getVSCodePath,
@@ -27,6 +31,23 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", (event) => {
     if (event.ctrlKey && event.key === "y") {
       windowManager.createWindow("Terminal", getTerminalPath);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.ctrlKey && event.key === "m") {
+      windowManager.createWindow("Terminal", getMinesweeperPath);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.ctrlKey && event.key === "x") {
+      windowManager.createWindow("Pacman", getPacmanPath);
+    }
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.ctrlKey && event.key === "g") {
+      windowManager.createWindow("2048", get2048Path);
     }
   });
 

@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   createTaskBar();
   const windowManager = new WindowManager();
   // windowManager.createWindow('MyGJU', 'https://mygju.gju.edu.jo/faces/index.xhtml');
-
+  
   document.addEventListener("keydown", (event) => {
     if (event.ctrlKey && event.key === "y") {
       windowManager.createWindow("Terminal", getTerminalPath);
@@ -36,7 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", (event) => {
     if (event.ctrlKey && event.key === "m") {
+
       windowManager.createWindow("Minesweeper", getMinesweeperPath);
+
     }
   });
 
@@ -59,6 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".task-icon").forEach((icon, index) => {
     clickTaskButton(windowManager, index, icon);
   });
+  
+  
 });
 
 export function clickAppButton(windowManager, index, icon) {

@@ -36,7 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", (event) => {
     if (event.ctrlKey && event.key === "m") {
-      windowManager.createWindow("Terminal", getMinesweeperPath);
+
+      windowManager.createWindow("Minesweeper", getMinesweeperPath);
+
     }
   });
 

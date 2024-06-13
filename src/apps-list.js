@@ -25,10 +25,10 @@ export const getTerminalPath = `../src/apps/terminal/terminal.html`;
 export const getAccountPath = `../src/apps/account/account.html`;
 
 // :::::Games::::::::::::::::::::::::::
-export const get2048Path = `../src/apps/2048/2048.html`;
+export const get2048Path = `../src/apps/_2048/2048.html`;
 
 export const getMinesweeperPath = `../src/apps/minesweeper/minesweeper.html`;
 
-export const getPacmanPath = `../src/apps/pacman/pacman.html`;
+export const getPacmanPath = `../src/apps/_pacman/pacman.html`;
 
 export const getGamePath = `../src/apps/game/game.html`;

@@ -1,4 +1,3 @@
-
 <div align="center" >
 <img src='./public/astrolabe-logo.png' alt='logo' width='64' height='64'>
 <h1><strong>AstroOS</strong> ✨</h1>
@@ -7,19 +6,33 @@
 </div>
 
 
-
-> [!NOTE]  
-> This project is currently under development.
-
-
 ---
 
 ### List of Content
 
 - [List of Content](#list-of-content)
+- [Screenshots](#screenshots)
 - [Description](#description)
+- [Run it Locally](#run-it-locally)
+- [Shortcuts \& Notes](#shortcuts--notes)
 - [development](#development)
 - [Design System](#design-system)
+
+---
+
+### Screenshots
+
+<details>
+<summary>
+  Screenshots
+</summary>
+  <div align="center">
+  <img src ="./public/terminal.png" alt="Terminal">
+  <img src ="./public/mygju.png" alt="MyGJU">
+  <img src ="./public/pacman.png" alt="Pacman">
+  <img src ="./public/account.png" alt="Account">
+  </div>
+</details>
 
 ---
 
@@ -27,17 +40,48 @@
 
 > _Anything that can built in Javascript, will be built in Javascript._
 
-
 <p>
-A Semi-OS running natively on the Web (using vanilla JS). This project is inspired by <a href="https://puter.com">Puter</a>. 
-This project is intended as a showcase, not intentions yet of making it a production-ready App.
+A Semi-OS running natively on the Web (using vanilla JS). inspired by <a href="https://puter.com">Puter</a>. 
+This project is intended as a showcase, not intentions of making it a production-ready App.
+
+AstroOS is our Submission for GJU's first Hackathon
 </p>
 
+---
+### Run it Locally
+1. install this Repository
+   ```bash
+   git clone https://github.com/astrolabe-gju/astroOS.git
+   ```
+2. Navigate to the Directory
+    ```bash
+    cd astroOS
+    ```
+3. **If your using VSCode**
+   ```bash
+   code . # This opens a Vscode instance with astroOS as its project
+   ```
+4. press `Ctrl` + `P` and search for `index.html` which is located in `dist/` folder
+   <img src="./public/search-index.png" alt="index location">
+5. Using Live Server Extension, press `Alt` + `L` then `Alt` + `O` (Install it from Marketplace if not there)
+   
+---
+### Shortcuts & Notes
+> [!IMPORTANT]
+> Not every Application works out of the box or as intended, This was due to our limited time we had for this Project.
+<details>
+<summary>
+Shortcuts
+</summary>
+<strong>Terminal:</strong> Ctrl + y <br>
+<strong>Pacman:</strong> Ctrl + X <br>
+<strong>Minesweeper:</strong> Ctrl + M<br>
+<strong>2048:</strong> Ctrl + G <br>
+</details>
 
 ---
 
 ### development
-
 
 to install dependencies (requires nodejs)
 

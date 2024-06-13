@@ -30,7 +30,7 @@
 <summary>
   Screenshots
 </summary>
-  <div align="center">
+  <div  align="center">
   <img src ="./public/terminal.png" alt="Terminal">
   <img src ="./public/mygju.png" alt="MyGJU">
   <img src ="./public/pacman.png" alt="Pacman">
